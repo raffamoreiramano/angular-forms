@@ -1,0 +1,18 @@
+<div class="login">
+  <form [formGroup]="form">
+    <h1>Login</h1>
+    <fieldset>
+      <app-input [props]="emailProps"></app-input>
+      <app-input [props]="passwordProps"></app-input>
+      <app-radio-input [props]="citiesProps">
+        <option disabled #option>Zero</option>
+        <option value="1" #option>Um</option>
+        <option value="2" #option>Dois</option>
+        <option value="3" #option>Três</option>
+      </app-radio-input>
+    </fieldset>
+    <div class="actions">
+      <button type="submit">Entrar</button>
+    </div>
+  </form>
+</div>

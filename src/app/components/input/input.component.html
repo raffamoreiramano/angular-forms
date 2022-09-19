@@ -1,0 +1,79 @@
+<div [ngClass]="classList" [ngSwitch]="props.type">
+  <ng-container *ngSwitchDefault>
+    <label for="{{ props.id }}" class="input-label">{{ props.label }}</label>
+    <input
+      [formControl]="props.control"
+      class="input"
+      id="{{ props.id }}"
+      name="{{ props.name }}"
+      type="{{ props.type }}"
+      placeholder="{{ props.placeholder }}"
+      title="{{ title }}"
+    >
+    <strong class="error-message">{{ message }}</strong>
+  </ng-container>
+  <ng-container *ngSwitchCase="'number'">
+    <label for="{{ props.id }}" class="input-label">{{ props.label }}</label>
+    <input
+      [formControl]="props.control"
+      class="input"
+      id="{{ props.id }}"
+      name="{{ props.name }}"
+      type="{{ props.type }}"
+      placeholder="{{ props.placeholder }}"
+      title="{{ title }}"
+      (focus)="onFocus($event)"
+    >
+    <strong class="error-message">{{ message }}</strong>
+  </ng-container>
+  <ng-container *ngSwitchCase="'password'">
+    <label for="{{ props.id }}" class="input-label">{{ props.label }}</label>
+    <div class="password">
+      <input
+        class="toggle"
+        id="{{ props.id }}-suffix"
+        type="checkbox"
+        [formControl]="toggle"
+      />
+      <label class="toggle-icon" for="{{ props.id }}-suffix"></label>
+      <input
+        [formControl]="props.control"
+        class="input"
+        id="{{ props.id }}"
+        name="{{ props.name }}"
+        type="{{ showPassword ? 'text' : 'password' }}"
+        placeholder="{{ props.placeholder }}"
+        title="{{ title }}"
+      >
+    </div>
+    <strong class="error-message">{{ message }}</strong>
+  </ng-container>
+  <ng-container *ngSwitchCase="'file'">
+    <label for="{{ props.id }}" class="input-label">{{ props.label }}</label>
+    <div class="file">
+      <input
+        [formControl]="props.filename!.control"
+        class="filename"
+        type="text"
+        id="{{ props.id }}-filename"
+        placeholder="{{ props.placeholder }}"
+        title="{{ title }}"
+        name="{{ props.name }}_filename"
+      />
+      <label class="button" htmlFor="{{ props.id }}">
+        <i>🖴</i>
+      </label>
+      <input
+        class="input"
+        id="{{ props.id }}"
+        name="{{ props.name }}"
+        type="{{ props.type }}"
+        accept="{{ props.accept }}"
+        placeholder="{{ props.placeholder }}"
+        title="{{ title }}"
+        (change)="onChange($event)"
+      >
+    </div>
+    <strong class="error-message">{{ message }}</strong>
+  </ng-container>
+</div>

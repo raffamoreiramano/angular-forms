@@ -1,0 +1,546 @@
+.form-control {
+	min-width: 350px;
+
+	display: grid;
+	grid-template-rows: minmax(1rem, auto) minmax(3rem, auto) minmax(1rem, auto);
+	grid-template-columns: auto;
+	row-gap: 0.5em;
+
+	margin-bottom: 1em;
+
+}
+
+.form-control label {
+	padding-left: 1em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.form-control .input:not([type="checkbox"]):not([type="radio"]) {
+	height: 3.125rem;
+}
+
+.form-control .select {
+	position: relative;
+	display: grid;
+	max-width: 100%;
+
+	border-radius: 1em;
+}
+
+.form-control .select select {
+	display: none;
+}
+
+.form-control .select .input {
+	--border-color: var(--text-color);
+	--border-visibility: 0;
+
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 1em;
+	padding-right: 2.5em;
+
+	border-radius: inherit;
+
+	text-transform: none;
+	font-weight: normal;
+	color: rgb(var(--text-color));
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+    background: rgba(var(--input-color), 1);
+	box-shadow:
+		inset 0 10px 15px -10px rgba(var(--text-color), 0.25),
+		inset 0 0 0 2em rgba(var(--input-color), 0.75),
+		0 0 0 0.125em rgba(var(--border-color), var(--border-visibility));
+
+	outline-style: solid;
+	outline-width: 0.35em;
+	outline-offset: -0.1em;
+	outline-color: transparent;
+
+	transition: 150ms ease-in-out;
+	cursor: pointer;
+}
+
+.form-control .toggle {
+	display: none;
+}
+
+.form-control .select .value[value=""] ~ .input {
+	color: rgb(var(--placeholder-color));
+}
+
+.form-control .select .toggle:checked ~ .input {
+	outline-color: rgba(var(--border-color), 0.25);
+	--border-color: var(--main-color-1);
+	--border-visibility: 1;
+}
+
+.form-control .select .input::before {
+	content: '';
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background: transparent;
+
+	isolation: isolate;
+	z-index: 1;
+
+	cursor: default;
+}
+
+.form-control .select .toggle:checked ~ .input::before {
+	display: block;
+}
+
+.form-control .select .input::after {
+	font-size: .75rem;
+	content: '';
+	position: absolute;
+	width: 1em;
+	height: 1em;
+	right: 1.5em;
+	top: calc(50% - .2em);
+	
+	background-color: rgb(var(--placeholder-color));;
+	clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 20%, 55% 60%, 45% 60%, 0 20%, 0 10%);
+
+	transform-origin: 50% 25%;
+	transition: 200ms ease-in-out;
+}
+
+.form-control .select .toggle:checked ~ ::after {
+	transform: rotateZ(180deg);
+}
+
+.form-control .select .options {
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	padding-top: 1em;
+	border-radius: 1em;
+
+
+	width: 100%;
+	opacity: 0;
+	height: fit-content;
+	max-height: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	
+	z-index: 1;
+	pointer-events: none;
+	
+	transition: 200ms ease-in-out, max-height 200ms 200ms ease-in-out;
+}
+
+.form-control .select .options-list {
+	padding: 0 0.5em;
+	padding-bottom: 1em;
+	position: relative;
+	list-style: auto;
+	margin: 0;
+	user-select: none;
+	pointer-events: none;
+
+	width: 100%;
+	height: max-content;
+	max-height: 8.5em;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.form-control .select .options-list li {
+	display: block;
+	padding: 0.25em 0.5em;
+	border-radius: 0.5em;
+
+	transition: 100ms 25ms ease-in-out, color 0ms 25ms;
+
+	font-weight: 500;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	cursor: pointer;
+}
+
+.form-control .select .options-list li:hover {
+	background-color: rgba(var(--main-color-1), 0.75);
+
+	transition: 100ms ease-in-out, color 25ms 25ms;
+
+	color: white;
+}
+
+.form-control .select .options-list li.disabled {
+	font-weight: normal;
+	cursor: default;
+
+	color: rgb(var(--placeholder-color));
+}
+
+.form-control .select .options-list li.disabled:hover {
+	font-weight: normal;
+	background-color: rgb(var(--placeholder-color));
+	color: white;
+}
+
+.form-control .select .toggle:checked ~ .options {
+	top: calc(100% - 0.5em);
+	
+	opacity: 1;
+	max-height: 12.5em;
+	
+	transition: 200ms ease-in-out, max-height 0ms;
+}
+
+.form-control .select .toggle:checked ~ .options .options-list {
+	pointer-events: all;
+}
+
+.form-control .select .options .searchbox {
+	padding-right: 1em;
+}
+
+.form-control .select .options .searchbox input {
+	width: 100%;
+	padding: 0.5em;
+	margin: 0.5em;
+	margin-right: 0;
+	border-radius: 0.5em;
+
+	background-color: rgba(var(--input-color));
+
+	outline: none;
+	box-shadow: 
+		inset 0 10px 15px -10px rgba(var(--text-color), 0.25),
+		inset 0 0 0 .1em rgba(var(--border-color), 0.1);
+
+	pointer-events: all;
+}
+
+.form-control .select .options .searchbox input:focus {
+	box-shadow: 
+		inset 0 10px 15px -10px rgba(var(--text-color), 0.25),
+		inset 0 0 0 .25em rgba(var(--border-color), 0.25),
+		inset 0 0 0 .1em rgba(var(--border-color), 0.25);
+}
+
+.form-control .select .options .options-list::-webkit-scrollbar-track {
+	margin: 0 !important;
+	margin-bottom: 1em !important;
+}
+
+.form-control .radio {
+	display: flex;
+	flex-flow: wrap;
+	padding: 0;
+	padding-left: 1em;
+	padding-top: 0.25em;
+	gap: .5em 1em;
+	margin: 0;
+}
+
+.form-control .checkboxes li .label,
+.form-control .radio li .label {
+	position: relative;
+	margin-right: 0.5em;
+	padding-left: 0.5em;
+
+	text-transform: none;
+	font-weight: 500;
+
+	transition: 1000ms cubic-bezier(0.5, 3, 0, -0.5);
+}
+
+.form-control .checkboxes .input:not(:disabled):hover ~ .label,
+.form-control .radio .input:not(:disabled):not(:checked):hover ~ .label {
+	opacity: 1;
+	width: 100%;
+
+	color: rgb(var(--main-color-1));
+}
+
+.form-control .radio li input:disabled ~ .label {
+	opacity: 0.5 !important;
+}
+
+.form-control .radio li input:disabled ~ .label::after {
+	all: unset;
+}
+
+.form-control .checkboxes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+	gap: .5rem;
+}
+
+.form-control .checkboxes li {
+	display: block;
+}
+
+.form-control .password {
+	position: relative;
+
+	isolation: isolate;
+}
+
+.form-control .password .input {
+	padding-right: 3.5em;
+
+	width: 100%;
+}
+
+.form-control .password .toggle-icon {
+	font-size: .85em;
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 3.5em;
+	height: calc(100% - .5em);
+	background-color: transparent;
+
+	margin: .25em;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	z-index: 1;
+}
+
+.form-control .password .toggle-icon::before {
+	content: '';
+	position: absolute;
+
+	width: 1.5em;
+	height: 1.5em;
+
+	border-radius: 100% 0;
+
+	background-color: transparent;
+	box-shadow: inset 0.125em 0.125em 0 .125em rgb(var(--placeholder-color));
+
+	transition: 50ms ease-out;
+
+	transform: rotateZ(45deg);
+}
+
+.form-control .password .toggle-icon::after {
+	content: '';
+	position: absolute;
+
+	width: .55em;
+	height: .55em;
+
+	background-color: rgb(var(--placeholder-color));
+
+	border-radius: 100%;
+
+	transition: 50ms ease-in, border-radius 0ms 50ms;
+}
+
+.form-control .password .toggle:checked ~ .toggle-icon::before {
+	height: 0.25em;
+	border-radius: 0;
+
+	width: 2em;
+
+	background: rgb(var(--placeholder-color));
+
+	transform: rotateZ(70deg) rotateX(90deg) rotateY(-90deg);
+
+	transition: 50ms ease-in;
+}
+
+.form-control .password .toggle:checked ~ .toggle-icon::after {
+	width: 2em;
+	height: 0.225em;
+
+	border-radius: 0;
+	border: none;
+
+	transition: 50ms ease-in, border-radius 0ms 50ms;
+}
+
+.form-control .file {
+	position: relative;
+	border-radius: 1rem;
+	background-clip: border-box;
+}
+
+.form-control .file .input {
+	display: none;
+}
+
+.form-control .file .filename {
+	width: 100%;
+}
+
+.form-control .file .button {
+	--shadow-color: var(--input-shadow-color);
+	--light-color: var(--bg-color-1);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	height: 100%;
+	aspect-ratio: 1.5 / 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: linear-gradient(to right, transparent, rgb(var(--input-color)));
+	box-shadow:
+		inset -.5rem -.25rem .25rem -.5rem rgba(var(--shadow-color), .3),
+		inset -.5rem 0 .25rem -.5rem rgba(var(--shadow-color), .3),
+		inset -.5rem .25rem .25rem -.5rem rgba(var(--shadow-color), .3),
+		inset -.5rem 0 .35rem -.5rem rgb(var(--input-color)),
+		inset -.5rem 0 .5rem -.5rem rgb(var(--light-color));
+
+	border-radius: inherit;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	border-right: .0125rem solid rgba(var(--input-color), 1);	
+
+	z-index: 1;
+	cursor: pointer;
+
+	transition: 1000ms cubic-bezier(0.5, 3, 0, -0.5);
+}
+
+.form-control .file .filename:disabled ~ .button {
+	width: 100%;
+	padding-right: 1em;
+}
+
+.form-control .file .filename:disabled ~ .button > *{
+	margin-left: auto;
+}
+
+.form-control .file .button:hover {
+	--light-color: var(--main-color-1);
+	--shadow-color: var(--main-color-1);
+}
+
+.form-control .file .button svg {
+	transition: 1000ms cubic-bezier(0.5, 3, 0, -0.5);
+}
+
+.form-control .file .button:hover svg {
+	fill: rgb(var(--main-color-1));
+}
+
+.form-control.invalid .file .button:hover svg {
+	fill: rgb(var(--main-color-4));
+}
+
+.form-control.invalid .file .button:hover {
+	--light-color: var(--main-color-4);
+	--shadow-color: var(--main-color-4);
+}
+
+.form-control .file .button i {
+	font-size: 2rem;
+	padding-bottom: .75rem;
+}
+
+.form-control .file .filename:focus ~ .button {
+	box-shadow: none;
+}
+
+.form-control .group {
+	display: flex;
+	flex-direction: row;
+	gap: .5rem;
+	width: 100%;
+}
+
+.form-control .group > * {
+	min-width: 0;
+	width: 100%;
+}
+
+.form-control .group > * {
+	border-radius: .25rem;
+}
+
+.form-control .group > *:first-child {
+	border-bottom-left-radius: 1rem;
+	border-top-left-radius: 1rem;
+}
+
+.form-control .group > *:last-child {
+	border-bottom-right-radius: 1rem;
+	border-top-right-radius: 1rem;
+}
+
+.form-control .group button {
+	margin: 0;
+}
+
+.form-control strong {
+	padding-left: 1em;
+
+	font-size: 0.75em;
+	font-weight: normal;
+
+	color: rgba(var(--main-color-4), 1);
+
+	opacity: 0;
+	pointer-events: none;
+	user-select: none;
+}
+
+.form-control strong::after {
+	content: '.';
+    visibility: hidden;
+}
+
+.form-control.invalid .input,
+.form-control.invalid .select .input,
+.form-control.invalid .select .toggle:checked ~ .input,
+.form-control.invalid .password .input,
+.form-control.invalid .file .filename {
+	--border-color: var(--main-color-4);
+	--border-visibility: 0.75;
+}
+
+.form-control.invalid label {
+	color: rgba(var(--main-color-4), 1);
+}
+
+.form-control.invalid strong {
+	opacity: 1;
+	pointer-events: all;
+	user-select: all;
+}
+
+@media screen and (max-width: 768px) {
+	.form-control {
+		min-width: unset;
+		width: 100%;
+		max-width: min(calc(100vw - 12rem), 350px);
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.form-control {
+		width: 100%;
+		max-width: max(calc(100vw - 12rem), 250px);
+	}
+}

@@ -1,0 +1,32 @@
+<div [ngClass]="classList">
+  <label for="{{ props.id }}">{{ props.label }}</label>
+  <div class="select">
+    <select class="value" name="city" [formControl]="props.control">
+        <ng-content></ng-content>
+    </select>
+    <input id="{{ props.id }}" class="toggle" type="checkbox" [formControl]="toggle">
+    <label
+      for="{{ props.id }}"
+      class="input"
+      title="{{ title }}"
+    >
+      {{ selected }}
+    </label>
+    <div class="options glass">
+      <div *ngIf="props.search" class="searchbox">
+        <input [formControl]="searchbox"/>
+      </div>
+      <ul class="options-list" #option>
+        <li
+          *ngFor="let option of options"
+          [class]="option.disabled ? 'disabled' : null"
+          title="{{ option.value }}: {{ option.innerText }}"
+          (click)="select(option)"
+        >
+          {{ option.innerText }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <strong class="error-message">{{ message }}</strong>
+</div>

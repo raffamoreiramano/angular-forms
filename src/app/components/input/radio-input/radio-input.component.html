@@ -1,0 +1,19 @@
+<div [ngClass]="classList">
+  <label for="{{ props.id }}">{{ props.label }}</label>
+  <ul id="{{ props.id }}" class="radio">
+    <li *ngFor="let option of options; let index=index">
+      <input
+        id="option-{{ index }}-{{ props.id }}"
+        class="input"
+        type="radio"
+        name="{{ props.name }}"
+        value="{{ option.value }}"
+        [disabled]="option.disabled"
+        [checked]="props.control.value === option.value"
+        (change)="change(option)"
+      />
+      <label class="label" for="option-{{ index }}-{{ props.id }}">{{ option.innerText }}</label>
+    </li>
+  </ul>
+  <strong class="error-message">{{ message }}</strong>
+</div>

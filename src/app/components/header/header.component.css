@@ -1,0 +1,51 @@
+header {
+  display: flex;
+}
+
+header h2 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: auto;
+  overflow: hidden;
+  overflow-wrap: normal;
+  margin: auto 0;
+}
+
+header aside {
+  margin: auto;
+  margin-right: 0;
+
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  align-items: center;
+}
+
+header aside p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+header aside button {
+  all: unset;
+
+  font-size: 1.5rem;
+
+  box-sizing: border-box;
+  display: flex;
+  width: max-content;
+  
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  header strong,
+  header p {
+      display: none;
+  }
+
+  header aside button {
+      padding: 1rem;
+  }
+}
